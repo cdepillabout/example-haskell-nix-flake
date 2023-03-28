@@ -42,7 +42,7 @@
         {
           packages.default = pkgs.example-haskell-nix-flake;
 
-          devShell.default = pkgs.myDevShell;
+          # devShell.default = pkgs.myDevShell;
         }
       );
 }
