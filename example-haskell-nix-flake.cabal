@@ -26,9 +26,10 @@ executable example-haskell-nix-flake
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
 
-    -- Other library packages from which modules are imported.
-    build-depends:    base ^>=4.13.0.0
-                    , attoparsec
+    build-depends:  
+        -- GHC-9.2. Change this if you want another version of GHC
+        base ^>=4.16.0.0
+      , attoparsec
 
     -- Directories containing source files.
     hs-source-dirs:   app
