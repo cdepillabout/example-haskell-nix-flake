@@ -27,8 +27,7 @@ executable example-haskell-nix-flake
     -- other-extensions:
 
     build-depends:  
-        -- GHC-9.2. Change this if you want another version of GHC
-        base ^>=4.16.0.0
+        base
       , attoparsec
 
     -- Directories containing source files.
