@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  push:
+
+jobs:
+  nix-build:
+    name: Nix Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cachix/install-nix-action@v22
+
+      - name: Build with Nix
+        run: nix build -L
+
+      - name: Build with cabal-install in dev shell
+        run: nix develop --command cabal build
