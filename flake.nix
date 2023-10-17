@@ -20,6 +20,15 @@
       example-haskell-nix-flake =
         final.haskell.lib.compose.justStaticExecutables
         final.myHaskellPackages.example-haskell-nix-flake;
+
+      my-dev-shell = final.myHaskellPackages.shellFor {
+        packages = ps: [ps.example-haskell-nix-flake];
+
+        nativeBuildInputs = [
+          final.cabal-install
+          final.haskellPackages.haskell-language-server
+        ];
+      };
     };
 
     forEachSystem = f:
@@ -41,14 +50,7 @@
     });
 
     devShells = forEachSystem (pkgs: {
-      default = pkgs.myHaskellPackages.shellFor {
-        packages = ps: [ps.example-haskell-nix-flake];
-
-        nativeBuildInputs = [
-          pkgs.cabal-install
-          pkgs.haskellPackages.haskell-language-server
-        ];
-      };
+      default = pkgs.my-dev-shell;
     });
   };
 }
