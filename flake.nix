@@ -10,7 +10,7 @@
     self,
   }: let
     overlay = final: prev: {
-      haskellPackages = prev.haskellPackages.override {
+      myHaskellPackages = prev.haskellPackages.override {
         overrides = hfinal: hprev: {
           example-haskell-nix-flake =
             hfinal.callCabal2nix "example-haskell-nix-flake" ./. {};
@@ -19,7 +19,7 @@
 
       example-haskell-nix-flake =
         final.haskell.lib.compose.justStaticExecutables
-        final.haskellPackages.example-haskell-nix-flake;
+        final.myHaskellPackages.example-haskell-nix-flake;
     };
 
     forEachSystem = f:
@@ -41,7 +41,7 @@
     });
 
     devShells = forEachSystem (pkgs: {
-      default = pkgs.haskellPackages.shellFor {
+      default = pkgs.myHaskellPackages.shellFor {
         packages = ps: [ps.example-haskell-nix-flake];
 
         nativeBuildInputs = [
